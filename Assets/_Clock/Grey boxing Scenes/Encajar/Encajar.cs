@@ -5,7 +5,7 @@ using UnityEngine;
 public class Encajar : MonoBehaviour
 {
     public string targetPieceType;
-    public GameObject targetPiece;
+    private GameObject targetPiece;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class Encajar : MonoBehaviour
         if (this.targetPiece != null)
         {
             // Si la pieza es del mismo tipo que el hueco
-            if (this.targetPieceType == "1")
+            if (true /*this.targetPieceType == "1"*/)
             {
                 // Cálculamos distancia
                 float xDistance = Mathf.Abs(this.targetPiece.transform.position.x - transform.position.x);

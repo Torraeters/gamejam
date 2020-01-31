@@ -233,7 +233,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPieceType: 1
-  targetPiece: {fileID: 0}
 --- !u!1 &1065027920
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +336,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 0
 --- !u!58 &1065027924
 CircleCollider2D:
   m_ObjectHideFlags: 0
