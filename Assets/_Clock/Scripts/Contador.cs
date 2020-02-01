@@ -22,6 +22,8 @@ public class Contador : MonoBehaviour
 
     float startTime;
 
+    bool stop = false;
+
     void Start() {
         // Cogemos el tiempo inicial
         startTime = Time.time;
@@ -35,7 +37,7 @@ public class Contador : MonoBehaviour
         text.text = Mathf.Round(tiempoRestante) + "s";
 
         // Cada 'segundo' moverá la aguja un segundo de reloj
-        if (Time.time - startTime >= tiempoMovimientoAguja) {
+        if (Time.time - startTime >= tiempoMovimientoAguja && stop == false) {
             // Restamos el tiempo conforme avanza
             tiempoRestante -= 1;
 
@@ -45,12 +47,26 @@ public class Contador : MonoBehaviour
             // Actualizamos el valor de starttime
             startTime = Time.time;
         }
+
+        if (tiempoRestante <= 0) {
+            stopMovimientoAguja();
+        }
     }
 
+    // Función que añade tiempo al contador para cuando el jugador acierta, y rota la aguja
+    // conforme al tiempo que se haya añadido
     public void anyadirTiempo(int tiempo) {
         tiempoRestante += tiempo;
+        aguja.transform.Rotate(0.0f, 0.0f, anguloEnSegundos*tiempo, Space.Self);
     }
 
+    public void stopMovimientoAguja() {
+        stop = true;
+    }
 
-    
+    // Función para cambiar la velocidad de la aguja
+    public void cambiarTiempoMovimientoAguja(float nuevoTiempoMovimientoAguja) {
+        tiempoMovimientoAguja = nuevoTiempoMovimientoAguja;
+    }
+   
 }

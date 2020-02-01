@@ -18,7 +18,7 @@ public class Objeto : MonoBehaviour
     void Start()
     {
         angulo = 0;
-        tipoPieza = tiposPiezas[1];
+        tipoPieza = tiposPiezas[2];
         
     }
 

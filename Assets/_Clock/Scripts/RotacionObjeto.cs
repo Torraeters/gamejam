@@ -15,13 +15,12 @@ public class RotacionObjeto : MonoBehaviour
     {
         objeto = GetComponent<Objeto>();
 
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        movimientoBajada();
+        //movimientoBajada();
         moverGear();
         if (objeto.tipoPieza == objeto.tiposPiezas[2])
         {
@@ -69,17 +68,16 @@ public class RotacionObjeto : MonoBehaviour
     // Control del moviminento horizontal del objeto
     private void moverGear()
     {
-        if (Input.GetButton("Horizontal"))
+
+        if (Input.GetAxis("Horizontal") > 0 && gameObject.GetComponent<Rigidbody2D>().constraints != RigidbodyConstraints2D.FreezePosition)
         {
-            if (Input.GetAxis("Horizontal") > 0)
-            {
-                transform.Translate(velocity * Time.deltaTime, 0, 0, Space.World);
-            }
-            else
-            {
-                transform.Translate(-velocity * Time.deltaTime, 0, 0, Space.World);
-            }
+            transform.Translate(velocity * Time.deltaTime, 0, 0, Space.World);
         }
+        if (Input.GetAxis("Horizontal") < 0 && gameObject.GetComponent<Rigidbody2D>().constraints != RigidbodyConstraints2D.FreezePosition)
+        {
+            transform.Translate(-velocity * Time.deltaTime, 0, 0, Space.World);
+        }
+
     }
 
     //Movimiento automatico de bajada del objeto
