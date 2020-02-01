@@ -42,6 +42,7 @@ public class Encajar : MonoBehaviour
                 {
                     this.targetPiece.transform.position = transform.position;
                     this.targetPiece.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+                    this.targetPiece.tag = "Untagged";
                     isFitIn = true;
                     caidaObjetosScript.dejarCaerSiguiente();
                     this.enabled = false;

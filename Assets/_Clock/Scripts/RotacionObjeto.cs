@@ -35,7 +35,7 @@ public class RotacionObjeto : MonoBehaviour
     private void girarGear()
     {
         //Giro izquierda
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && gameObject.GetComponent<Rigidbody2D>().constraints != RigidbodyConstraints2D.FreezePosition)
         {
             transform.Rotate(0, 0, grads);
             if (objeto.angulo == 180)
@@ -49,7 +49,7 @@ public class RotacionObjeto : MonoBehaviour
         }
 
         // Giro Derecha
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && gameObject.GetComponent<Rigidbody2D>().constraints != RigidbodyConstraints2D.FreezePosition)
         {
             transform.Rotate(0, 0, -grads);
 
