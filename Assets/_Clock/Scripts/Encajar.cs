@@ -32,15 +32,17 @@ public class Encajar : MonoBehaviour
                 // Cálculamos distancia
                 float xDistance = Mathf.Abs(this.targetPiece.transform.position.x - transform.position.x);
                 float yDistance = Mathf.Abs(this.targetPiece.transform.position.y - transform.position.y);
+                float angleDiff = Mathf.Abs(this.targetPieceRotation - this.targetPiece.transform.rotation.z);
 
                 // Distancia mínima aceptable para que "encaje"
                 float minDistance = 2f;
 
                 // Si se cumple la dispancia mínima, encajar la pieza
-                if (xDistance < minDistance && yDistance < minDistance && this.targetPieceRotation == gameObject.transform.rotation.z)
+                if (xDistance < minDistance && yDistance < minDistance && angleDiff < 0.2)
                 {
                     this.targetPiece.transform.position = transform.position;
                     this.targetPiece.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+                    this.targetPiece.tag = "Untagged";
                     isFitIn = true;
                     caidaObjetosScript.dejarCaerSiguiente();
                     this.enabled = false;
