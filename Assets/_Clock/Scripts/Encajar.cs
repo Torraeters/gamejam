@@ -37,7 +37,7 @@ public class Encajar : MonoBehaviour
                 float minDistance = 2f;
 
                 // Si se cumple la dispancia mínima, encajar la pieza
-                if (xDistance < minDistance && yDistance < minDistance && this.targetPieceRotation == this.targetPiece.transform.rotation.z)
+                if (xDistance < minDistance && yDistance < minDistance && this.targetPieceRotation == gameObject.transform.rotation.z)
                 {
                     this.targetPiece.transform.position = transform.position;
                     this.targetPiece.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
@@ -53,7 +53,7 @@ public class Encajar : MonoBehaviour
     void OnTriggerEnter2D(Collider2D coll)
     {
         // Al detectar una colisión con una pieza, coger referencia del GameObject
-        if (coll.gameObject.CompareTag("piece"))
+        if (coll.gameObject.CompareTag("piece") || coll.gameObject.CompareTag("tornillo"))
         {
             this.targetPiece = coll.gameObject;
         }
