@@ -19,8 +19,10 @@ public class Encajar : MonoBehaviour
     {
         if (this.targetPiece != null)
         {
+            string pieceType = targetPiece.GetComponent<Objeto>().tipoPieza;
+
             // Si la pieza es del mismo tipo que el hueco
-            if (true /*this.targetPieceType == "1"*/)
+            if (this.targetPieceType == pieceType)
             {
                 // Cálculamos distancia
                 float xDistance = Mathf.Abs(this.targetPiece.transform.position.x - transform.position.x);
