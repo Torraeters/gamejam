@@ -5,13 +5,16 @@ using UnityEngine;
 public class atornillar : MonoBehaviour
 {
 
+    GameObject hole;
+    public int speed;
     Encajar encajar;
-    private GameObject targetPiece;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        hole = GameObject.Find("hole");
+        encajar = hole.GetComponent<Encajar>();
 
     }
 
@@ -19,9 +22,29 @@ public class atornillar : MonoBehaviour
     void Update()
     {
 
-        if(encajar.isFitIn == true)
+
+        if(encajar.targetPiece != null)
         {
-           
+            if (encajar.isFitIn == true)
+            {
+
+
+                //Detect when the up arrow key is pressed down
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                    transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime);
+
+                //Detect when the up arrow key has been released
+                if (Input.GetKeyUp(KeyCode.UpArrow))
+                    Debug.Log("Up Arrow key was released.");
+
+                //Detect when the up arrow key is pressed down
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                    Debug.Log("Up Arrow key was pressed.");
+
+                //Detect when the up arrow key has been released
+                if (Input.GetKeyUp(KeyCode.DownArrow))
+                    Debug.Log("Up Arrow key was released.");
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ public class RotacionObjeto : MonoBehaviour
     void Start()
     {
         objeto = GetComponent<Objeto>();
+
         
     }
 
