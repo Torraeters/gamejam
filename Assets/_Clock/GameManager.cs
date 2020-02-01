@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        hole = GameObject.Find("hole");
+        hole = GameObject.Find("engranajeConAcopleAgujero");
         encajar = hole.GetComponent<Encajar>();
         cont = GameObject.Find("Main Camera");
         contador = cont.GetComponent<Contador>();
