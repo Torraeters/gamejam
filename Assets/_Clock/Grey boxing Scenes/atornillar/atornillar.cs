@@ -8,6 +8,8 @@ public class atornillar : MonoBehaviour
     GameObject hole;
     public int speed;
     Encajar encajar;
+    GameObject tornillo;
+    Objeto obj;
 
 
     // Start is called before the first frame update
@@ -15,6 +17,8 @@ public class atornillar : MonoBehaviour
     {
         hole = GameObject.FindWithTag("hole");
         encajar = hole.GetComponent<Encajar>();
+        tornillo = GameObject.FindWithTag("tornillo");
+        obj = tornillo.GetComponent<Objeto>();
 
     }
 
@@ -29,7 +33,13 @@ public class atornillar : MonoBehaviour
 
                 //Detect when the up arrow key is pressed down
                 if (Input.GetKeyDown(KeyCode.UpArrow))
-                    transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime);
+                {
+                    Debug.Log("hola");
+                    tornillo.transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime);
+                    Debug.Log("adios");
+                }
+
+
 
                 //Detect when the up arrow key has been released
                 if (Input.GetKeyUp(KeyCode.UpArrow))

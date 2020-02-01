@@ -15,11 +15,16 @@ public class GameManager : MonoBehaviour
 
     // tiempo que se añade cuando se encaja una pieza
     public int tiempo = 5;
-
     private bool esLaPrimeraVez = true;
+
+    // Miramos si se ha pausado el juego
+    private bool isPaused = false;
 
     //att privado (_instancia)
     static private GameManager _instancia;
+
+    // Lista de objetos de la pantalla tipo Hole
+    private GameObject[] holesList;
 
     //att publico (instancia) por el que accedemos
     static public GameManager instancia
@@ -65,14 +70,55 @@ public class GameManager : MonoBehaviour
         encajar = hole.GetComponent<Encajar>();
         cont = GameObject.Find("Main Camera");
         contador = cont.GetComponent<Contador>();
+        holesList = GameObject.FindGameObjectsWithTag("hole");
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            pauseGame();
+        }
         if (encajar.isFitIn && esLaPrimeraVez)
         {
             contador.anyadirTiempo(tiempo);
             esLaPrimeraVez = false;
+        }
+        winLostGame();
+    }
+
+    private void pauseGame()
+    {
+        if (isPaused)
+        {
+            isPaused = false;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            isPaused = true;
+            Time.timeScale = 1;
+        }
+    }
+
+    private void winLostGame()
+    {
+        if (contador.tiempoRestante != 0)
+        {
+            foreach (GameObject holeElement in holesList)
+            {
+                Encajar encajar = holeElement.GetComponent<Encajar>();
+                if (!encajar.isFitIn)
+                {
+                    return;
+                }
+            }
+            // Aquí se ha de poner lo que queremos que haga cuando se haya ganado
+            Debug.Log("Has ganado");
+        }else if(contador.tiempoRestante == 0)
+        {
+            // Aquí se ha de poner lo que queremos que haga cuando se haya perdido
+            Debug.Log("Has perdido");
         }
     }
 }
