@@ -210,7 +210,7 @@ PrefabInstance:
         type: 3}
       propertyPath: piezas.Array.data[3]
       value: 
-      objectReference: {fileID: 2213703957451148413, guid: e611891489fe64892a459e2d7e0675d8,
+      objectReference: {fileID: 5192854965907750031, guid: e611891489fe64892a459e2d7e0675d8,
         type: 3}
     - target: {fileID: 4511234504936074415, guid: 73777c7aef1f9ab42990f2dc26228a9f,
         type: 3}
@@ -1184,7 +1184,7 @@ MonoBehaviour:
   tiempoRestante: 60
   aguja: {fileID: 983374730}
   text: {fileID: 760410750}
-  tiempoMovimientoAguja: 1
+  tiempoMovimientoAguja: 0.1
 --- !u!61 &1931443163
 BoxCollider2D:
   m_ObjectHideFlags: 0
