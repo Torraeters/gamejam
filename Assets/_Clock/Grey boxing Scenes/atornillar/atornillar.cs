@@ -21,8 +21,6 @@ public class atornillar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         if(encajar.targetPiece != null)
         {
             if (encajar.isFitIn == true)
