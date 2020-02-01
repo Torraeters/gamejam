@@ -8,11 +8,15 @@ public class Encajar : MonoBehaviour
     public GameObject targetPiece;
     public bool isFitIn = false;
     private float targetPieceRotation;
+    GameObject caidaObjetos;
+    CaidaObjetosScript caidaObjetosScript;
 
     // Start is called before the first frame update
     void Start()
     {
         this.targetPieceRotation = gameObject.transform.rotation.z;
+        caidaObjetos = GameObject.Find("CaidaObjetos");
+        caidaObjetosScript = caidaObjetos.GetComponent<CaidaObjetosScript>();
     }
 
     // Update is called once per frame
@@ -38,6 +42,8 @@ public class Encajar : MonoBehaviour
                     this.targetPiece.transform.position = transform.position;
                     this.targetPiece.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
                     isFitIn = true;
+                    caidaObjetosScript.dejarCaerSiguiente();
+                    this.enabled = false;
                 }
             }
         }

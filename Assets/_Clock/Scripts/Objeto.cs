@@ -18,8 +18,6 @@ public class Objeto : MonoBehaviour
     void Start()
     {
         angulo = 0;
-        tipoPieza = tiposPiezas[2];
-        
     }
 
     // Update is called once per frame
