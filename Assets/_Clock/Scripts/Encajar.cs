@@ -34,7 +34,7 @@ public class Encajar : MonoBehaviour
                 float yDistance = Mathf.Abs(this.targetPiece.transform.position.y - transform.position.y);
 
                 // Distancia mínima aceptable para que "encaje"
-                float minDistance = 0.5f;
+                float minDistance = 2f;
 
                 // Si se cumple la dispancia mínima, encajar la pieza
                 if (xDistance < minDistance && yDistance < minDistance && this.targetPieceRotation == this.targetPiece.transform.rotation.z)
@@ -44,6 +44,7 @@ public class Encajar : MonoBehaviour
                     isFitIn = true;
                     caidaObjetosScript.dejarCaerSiguiente();
                     this.enabled = false;
+                    targetPiece.GetComponent<Collider2D>().enabled = false;
                 }
             }
         }
