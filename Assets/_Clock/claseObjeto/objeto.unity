@@ -237,11 +237,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca9fd33e94dd4448bfb51eee722edc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tiposPiezas:
+  - engranajeConTornillo
+  - engranajeSinTornillo
+  - engranajeConAcople
+  - triangularT
+  - circularT
+  - hexagonalT
   angulo: 0
   posicionX: 0
   posicionY: 0
-  esTornillo: 0
-  gearConTornillo: 0
+  tipoPieza: 
 --- !u!135 &899188752
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -329,3 +335,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocityDown: -0.2
+  objeto: {fileID: 0}

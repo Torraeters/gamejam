@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Objeto : MonoBehaviour
 {
+    public string[] tiposPiezas = new string[] { "engranajeConTornillo", "engranajeSinTornillo", "engranajeConAcople", "triangularT", "circularT", "hexagonalT" };
 
     public int angulo;
 
     public float posicionX;
     public float posicionY;
 
-    public bool esTornillo;
-    public bool gearConTornillo;
+    public string tipoPieza;
 
 
     // Start is called before the first frame update
     void Start()
     {
         angulo = 0;
+        tipoPieza = tiposPiezas[1];
         
     }
 
