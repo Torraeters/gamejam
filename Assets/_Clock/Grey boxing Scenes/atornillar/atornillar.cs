@@ -13,7 +13,7 @@ public class atornillar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hole = GameObject.Find("hole");
+        hole = GameObject.FindWithTag("hole");
         encajar = hole.GetComponent<Encajar>();
 
     }
