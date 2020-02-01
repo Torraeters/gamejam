@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
             if (_instancia == null)
             {
                 // creamos un nuevo objeto llamado "_MiGameManager"
-                GameObject go = new GameObject("_MiGameManager");
+                GameObject go = new GameObject("GameManager");
 
                 // anadimos el script "GameManager" al objeto
                 go.AddComponent<GameManager>();

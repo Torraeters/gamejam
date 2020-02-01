@@ -24,7 +24,6 @@ public class RotacionObjeto : MonoBehaviour
         moverGear();
         if (objeto.tipoPieza == objeto.tiposPiezas[2])
         {
-            Debug.Log("La pieza puede rotar");
             girarGear();
         }
     }

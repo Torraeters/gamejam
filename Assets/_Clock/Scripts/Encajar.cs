@@ -7,11 +7,12 @@ public class Encajar : MonoBehaviour
     public string targetPieceType;
     public GameObject targetPiece;
     public bool isFitIn = false;
+    private float targetPieceRotation;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        this.targetPieceRotation = gameObject.transform.rotation.z;
     }
 
     // Update is called once per frame
@@ -32,7 +33,7 @@ public class Encajar : MonoBehaviour
                 float minDistance = 0.5f;
 
                 // Si se cumple la dispancia mínima, encajar la pieza
-                if (xDistance < minDistance && yDistance < minDistance)
+                if (xDistance < minDistance && yDistance < minDistance && this.targetPieceRotation == this.targetPiece.transform.rotation.z)
                 {
                     this.targetPiece.transform.position = transform.position;
                     this.targetPiece.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
