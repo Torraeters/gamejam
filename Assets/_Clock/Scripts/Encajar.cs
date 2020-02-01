@@ -37,7 +37,6 @@ public class Encajar : MonoBehaviour
                 // Distancia mínima aceptable para que "encaje"
                 float minDistance = 2f;
 
-                Debug.Log(angleDiff);
                 // Si se cumple la dispancia mínima, encajar la pieza
                 if (xDistance < minDistance && yDistance < minDistance && angleDiff < 0.2)
                 {
