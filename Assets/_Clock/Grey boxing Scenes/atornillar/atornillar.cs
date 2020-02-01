@@ -21,6 +21,7 @@ public class atornillar : MonoBehaviour
 
         if(encajar.isFitIn == true)
         {
+           
         }
     }
 }

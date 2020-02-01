@@ -5,7 +5,7 @@ using UnityEngine;
 public class Encajar : MonoBehaviour
 {
     public string targetPieceType;
-    private GameObject targetPiece;
+    public GameObject targetPiece;
     public bool isFitIn = false;
 
     // Start is called before the first frame update
