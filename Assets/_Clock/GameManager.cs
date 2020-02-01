@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     //att publico (instancia) por el que accedemos
     public static GameManager instance = null;
 
+    public GameObject gameOverPanel;
+    public GameObject winPanel;
+
     void Awake()
     {
         //Check if instance already exists
@@ -105,11 +108,17 @@ public class GameManager : MonoBehaviour
             }
             // Aquí se ha de poner lo que queremos que haga cuando se haya ganado
             Debug.Log("Has ganado");
+
+            // Activamos animacion ganar
+            winPanel.GetComponent<Animator>().SetBool("isOpen", true);
+
         }
         else if (contador.tiempoRestante == 0)
         {
             // Aquí se ha de poner lo que queremos que haga cuando se haya perdido
             Debug.Log("Has perdido");
+            gameOverPanel.GetComponent<Animator>().SetBool("isOpen", true);
+
         }
     }
 }
