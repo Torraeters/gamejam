@@ -42,6 +42,7 @@ public class Encajar : MonoBehaviour
                 {
                     this.targetPiece.transform.position = transform.position;
                     this.targetPiece.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+                    this.targetPiece.GetComponent<Animator>().SetBool("isWorking", true);
                     if (this.targetPiece.tag == "piece")
                     {
                         caidaObjetosScript.dejarCaerSiguiente();
@@ -50,6 +51,11 @@ public class Encajar : MonoBehaviour
                     isFitIn = true;
                     this.enabled = false;
                     targetPiece.GetComponent<Collider2D>().enabled = false;
+
+
+
+                    gameObject.SetActive(false);
+
                 }
             }
         }
