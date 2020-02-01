@@ -47,8 +47,11 @@ public class Contador : MonoBehaviour
         }
     }
 
+    // Función que añade tiempo al contador para cuando el jugador acierta, y rota la aguja
+    // conforme al tiempo que se haya añadido
     public void anyadirTiempo(int tiempo) {
         tiempoRestante += tiempo;
+        aguja.transform.Rotate(0.0f, 0.0f, anguloEnSegundos*tiempo, Space.Self);
     }
 
 
