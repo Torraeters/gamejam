@@ -15,8 +15,10 @@ public class GameManager : MonoBehaviour
 
     // tiempo que se añade cuando se encaja una pieza
     public int tiempo = 5;
-
     private bool esLaPrimeraVez = true;
+
+    // Miramos si se ha pausado el juego
+    private bool isPaused = false;
 
     //att privado (_instancia)
     static private GameManager _instancia;
@@ -69,10 +71,28 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            pauseGame();
+        }
         if (encajar.isFitIn && esLaPrimeraVez)
         {
             contador.anyadirTiempo(tiempo);
             esLaPrimeraVez = false;
+        }
+    }
+
+    private void pauseGame()
+    {
+        if (isPaused)
+        {
+            isPaused = false;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            isPaused = true;
+            Time.timeScale = 1;
         }
     }
 }
