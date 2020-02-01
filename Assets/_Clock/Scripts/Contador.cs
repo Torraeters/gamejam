@@ -57,7 +57,15 @@ public class Contador : MonoBehaviour
     // conforme al tiempo que se haya añadido
     public void anyadirTiempo(int tiempo) {
         tiempoRestante += tiempo;
-        aguja.transform.Rotate(0.0f, 0.0f, anguloEnSegundos*tiempo, Space.Self);
+        if (tiempoRestante > 60)
+        {
+            tiempoRestante = 60;
+            aguja.transform.Rotate(0.0f, 0.0f, tiempo, Space.Self);
+        }
+        else
+        {
+            aguja.transform.Rotate(0.0f, 0.0f, anguloEnSegundos * tiempo, Space.Self);
+        }
     }
 
     public void stopMovimientoAguja() {
