@@ -5,7 +5,8 @@ using UnityEngine;
 public class Encajar : MonoBehaviour
 {
     public string targetPieceType;
-    private GameObject targetPiece;
+    public GameObject targetPiece;
+    public bool isFitIn = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class Encajar : MonoBehaviour
                 {
                     this.targetPiece.transform.position = transform.position;
                     this.targetPiece.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+                    isFitIn = true;
                 }
             }
         }
