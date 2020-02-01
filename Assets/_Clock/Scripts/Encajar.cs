@@ -53,7 +53,7 @@ public class Encajar : MonoBehaviour
     void OnTriggerEnter2D(Collider2D coll)
     {
         // Al detectar una colisión con una pieza, coger referencia del GameObject
-        if (coll.gameObject.CompareTag("piece"))
+        if (coll.gameObject.CompareTag("piece") || coll.gameObject.CompareTag("tornillo"))
         {
             this.targetPiece = coll.gameObject;
         }
