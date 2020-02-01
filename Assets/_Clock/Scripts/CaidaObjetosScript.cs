@@ -31,6 +31,7 @@ public class CaidaObjetosScript : MonoBehaviour
         // Random Index
         //int i = Random.Range(0, piezas.Length);
 
+        // Deja caer las primeras piezas en el orden en que están en el array 'piezas'
         if (index < maxIndex)
         {
             // Spawn Group at current Position
@@ -39,6 +40,14 @@ public class CaidaObjetosScript : MonoBehaviour
                         Quaternion.identity);
 
             index++;
+        }
+        // Ya ha salido una pieza de cada tipo, ahora son aleatorias
+        else
+        {
+            int i = Random.Range(0, piezas.Length);
+            Instantiate(piezas[i],
+                        transform.position,
+                        Quaternion.identity);
         }
     }
 
