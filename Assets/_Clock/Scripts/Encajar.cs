@@ -40,8 +40,8 @@ public class Encajar : MonoBehaviour
                 // Si se cumple la dispancia mínima, encajar la pieza
                 if (xDistance < minDistance && yDistance < minDistance && angleDiff < 0.2)
                 {
-                    this.targetPiece.transform.position = transform.position;
-                    this.targetPiece.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+                    this.targetPiece.transform.parent.gameObject.transform.position = transform.position;
+                    this.targetPiece.transform.parent.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
                     this.targetPiece.GetComponent<Animator>().SetBool("isWorking", true);
                     if (this.targetPiece.tag == "piece")
                     {

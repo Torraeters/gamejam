@@ -13,7 +13,7 @@ public class RotacionObjeto : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        objeto = GetComponent<Objeto>();
+        objeto = GetComponentsInChildren<Objeto>()[0];
 
     }
 
