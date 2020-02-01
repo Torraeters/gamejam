@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour
 
             // Activamos animacion ganar
             winPanel.GetComponent<Animator>().SetBool("isOpen", true);
+            //this.pauseGame();
 
         }
         else if (contador.tiempoRestante == 0)
@@ -118,6 +119,7 @@ public class GameManager : MonoBehaviour
             // Aquí se ha de poner lo que queremos que haga cuando se haya perdido
             Debug.Log("Has perdido");
             gameOverPanel.GetComponent<Animator>().SetBool("isOpen", true);
+            //this.pauseGame();
 
         }
     }
