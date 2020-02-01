@@ -10,10 +10,12 @@ public class CaidaObjetosScript : MonoBehaviour
 
     // Index del objeto que vaya a caer
     int index = 0;
+    int maxIndex;
 
     // Start is called before the first frame update
     void Start()
     {
+        maxIndex = piezas.Length;
         // Deja caer la primera pieza
         dejarCaerSiguiente();
     }
@@ -21,7 +23,7 @@ public class CaidaObjetosScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void dejarCaerSiguiente()
@@ -29,12 +31,15 @@ public class CaidaObjetosScript : MonoBehaviour
         // Random Index
         //int i = Random.Range(0, piezas.Length);
 
-        // Spawn Group at current Position
-        Instantiate(piezas[index],
-                    transform.position,
-                    Quaternion.identity);
+        if (index < maxIndex)
+        {
+            // Spawn Group at current Position
+            Instantiate(piezas[index],
+                        transform.position,
+                        Quaternion.identity);
 
-        index++;
+            index++;
+        }
     }
 
 }
