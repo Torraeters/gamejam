@@ -14,12 +14,26 @@ public class Suelo : MonoBehaviour
     {
         caidaObjetos = GameObject.Find("CaidaObjetos");
         caidaObjetosScript = caidaObjetos.GetComponent<CaidaObjetosScript>();
-        piezaActual = GameObject.FindWithTag("piece");
+        if (GameObject.FindWithTag("piece") != null)
+        {
+            piezaActual = GameObject.FindWithTag("piece");
+        }
+        else if (GameObject.FindWithTag("tornillo") != null)
+        {
+            piezaActual = GameObject.FindWithTag("tornillo");
+        }
     }
 
     public void Update()
     {
-        piezaActual = GameObject.FindWithTag("piece");
+        if (GameObject.FindWithTag("piece") != null)
+        {
+            piezaActual = GameObject.FindWithTag("piece");
+        }
+        else if (GameObject.FindWithTag("tornillo") != null)
+        {
+            piezaActual = GameObject.FindWithTag("tornillo");
+        }
     }
 
     void OnTriggerEnter2D(Collider2D coll)

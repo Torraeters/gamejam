@@ -4,61 +4,58 @@ using UnityEngine;
 
 public class atornillar : MonoBehaviour
 {
-
-
     public int speed = 10;
-    public bool isAtornillado = false;
     public SpriteRenderer rend;
     public Color negro = Color.black;
     public Color rojo = Color.red;
     public Color green = Color.green;
-
-
+    bool rutinaEmpezada;
+    bool atornillado;
+    int nivelAtornillado;
+    GameObject caidaObjetos;
+    CaidaObjetosScript caidaObjetosScript;
 
     // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<SpriteRenderer>();
+        nivelAtornillado = 0;
+        caidaObjetos = GameObject.Find("CaidaObjetos");
+        caidaObjetosScript = caidaObjetos.GetComponent<CaidaObjetosScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        StartCoroutine(noAtornillado());
-
-
-        //Detect when the up arrow key is pressed down
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (nivelAtornillado < 10)
         {
-
-            transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime);
-            if (transform.rotation.z >= .5)
+            if (!rutinaEmpezada)
             {
-
-                StartCoroutine(Atornillado());
-                isAtornillado = true;
-
+                StartCoroutine(noAtornillado());
+                rutinaEmpezada = true;
             }
 
+            //Detect when the up arrow key is pressed down
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                //  transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime);
+                transform.Rotate(0.0f, 0.0f, -45f, Space.Self);
+                nivelAtornillado++;
+            }
+
+            //Detect when the up arrow key is pressed down
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                transform.Rotate(0.0f, 0.0f, 45f, Space.Self);
+                nivelAtornillado--;
+            }
         }
-
-
-
-
-        //Detect when the up arrow key is pressed down
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        else
         {
-
-            transform.RotateAround(transform.position, Vector3.forward, speed * Time.deltaTime);
-            if (transform.rotation.z >= -.5)
-            {
-
-                StartCoroutine(Atornillado());
-                isAtornillado = true;
-
-            }
-
+            atornillado = true;
+            rend.material.color = green;
+            caidaObjetosScript.dejarCaerSiguiente();
+            this.enabled = false;
         }
     }
 
@@ -66,17 +63,13 @@ public class atornillar : MonoBehaviour
 
     IEnumerator noAtornillado()
     {
-        rend.material.color = rojo;
-        yield return new WaitForSeconds(0.6f);
-        rend.material.color = negro;
-        yield return new WaitForSeconds(0.3f);
-        rend.material.color = rojo;
-        yield return new WaitForSeconds(0.3f);
-        rend.material.color = negro;
-        yield return new WaitForSeconds(0.1f);
-        rend.material.color = rojo;
-        yield return new WaitForSeconds(0.1f);
-        rend.material.color = negro;
+        while (!atornillado)
+        {
+            rend.material.color = rojo;
+            yield return new WaitForSeconds(.5f);
+            rend.material.color = negro;
+            yield return new WaitForSeconds(.5f);
+        }
     }
 
     IEnumerator Atornillado()

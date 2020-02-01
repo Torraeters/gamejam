@@ -20,45 +20,35 @@ public class GameManager : MonoBehaviour
     // Miramos si se ha pausado el juego
     private bool isPaused = false;
 
-    //att privado (_instancia)
-    static private GameManager _instancia;
-
     // Lista de objetos de la pantalla tipo Hole
     private GameObject[] holesList;
 
     //att publico (instancia) por el que accedemos
-    static public GameManager instancia
+    public static GameManager instance = null;
+
+    void Awake()
     {
-        // metodo get
-        // se ejecuta al acceder por GameManager.instancia
-        get
+        //Check if instance already exists
+        if (instance == null)
         {
-            // si es la primera vez que accedemos a la instancia del GameManager,
-            // no existira, y la crearemos
-            if (_instancia == null)
-            {
-                // creamos un nuevo objeto llamado "_MiGameManager"
-                GameObject go = new GameObject("GameManager");
+            //if not, set instance to this
+            instance = this;
 
-                // anadimos el script "GameManager" al objeto
-                go.AddComponent<GameManager>();
+            // Get different component managers
+            //uiManager = GetComponent<UIManager>();
 
-                // guardamos en la instancia el objeto creado
-                // debemos guardar el componente ya que _instancia es del tipo GameManager
-                _instancia = go.GetComponent<GameManager>();
+            //Sets this to not be destroyed when reloading scene
+            DontDestroyOnLoad(gameObject);
 
-                // hacemos que el objeto no se elimine al cambiar de escena
-                DontDestroyOnLoad(go);
-            }
-
-            // devolvemos la instancia
-            // si no existia, en este punto ya la habra creado
-            return _instancia;
+            //Call the InitGame function to initialize the game
+            //InitGame();
         }
-
-        // metodo set
-        // no implementado para no permitir modificar la instancia "GameManager.instancia = x;"
+        else if (instance != this) //If instance already exists and it's not this:
+        {
+            DestroyImmediate(gameObject); //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+        }
     }
+
 
     // Constructor
     // Lo ocultamos el constructor para no poder crear nuevos objetos "sin control"
@@ -115,7 +105,8 @@ public class GameManager : MonoBehaviour
             }
             // Aquí se ha de poner lo que queremos que haga cuando se haya ganado
             Debug.Log("Has ganado");
-        }else if(contador.tiempoRestante == 0)
+        }
+        else if (contador.tiempoRestante == 0)
         {
             // Aquí se ha de poner lo que queremos que haga cuando se haya perdido
             Debug.Log("Has perdido");
