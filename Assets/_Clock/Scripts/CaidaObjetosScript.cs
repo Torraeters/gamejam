@@ -8,6 +8,9 @@ public class CaidaObjetosScript : MonoBehaviour
     // Grupo de objetos
     public GameObject[] piezas;
 
+    // Index del objeto que vaya a caer
+    int index = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,12 +27,14 @@ public class CaidaObjetosScript : MonoBehaviour
     public void dejarCaerSiguiente()
     {
         // Random Index
-        int i = Random.Range(0, piezas.Length);
+        //int i = Random.Range(0, piezas.Length);
 
         // Spawn Group at current Position
-        Instantiate(piezas[i],
+        Instantiate(piezas[index],
                     transform.position,
                     Quaternion.identity);
+
+        index++;
     }
 
 }
