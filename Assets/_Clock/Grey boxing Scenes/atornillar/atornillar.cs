@@ -33,7 +33,13 @@ public class atornillar : MonoBehaviour
 
                 //Detect when the up arrow key is pressed down
                 if (Input.GetKeyDown(KeyCode.UpArrow))
-                    obj.transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime);
+                {
+                    Debug.Log("hola");
+                    tornillo.transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime);
+                    Debug.Log("adios");
+                }
+
+
 
                 //Detect when the up arrow key has been released
                 if (Input.GetKeyUp(KeyCode.UpArrow))
