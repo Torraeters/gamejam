@@ -7,7 +7,6 @@ public class atornillar : MonoBehaviour
 
 
     public int speed = 10;
-    public bool isAtornillado = false;
     public SpriteRenderer rend;
     public Color negro = Color.black;
     public Color rojo = Color.red;
@@ -24,42 +23,34 @@ public class atornillar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        StartCoroutine(noAtornillado());
-
-
-        //Detect when the up arrow key is pressed down
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        Debug.Log(transform.rotation.z);
+        if(transform.rotation.z <= 1 && transform.rotation.z >= -1)
         {
+            StartCoroutine(noAtornillado());
 
-            transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime);
-            if (transform.rotation.z >= .5)
+            //Detect when the up arrow key is pressed down
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
 
-                StartCoroutine(Atornillado());
-                isAtornillado = true;
+              //  transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime);
+                transform.Rotate(0.0f, 0.0f, -45f, Space.Self);
 
             }
 
-        }
-
-
-
-
-        //Detect when the up arrow key is pressed down
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-
-            transform.RotateAround(transform.position, Vector3.forward, speed * Time.deltaTime);
-            if (transform.rotation.z >= -.5)
+            //Detect when the up arrow key is pressed down
+            if (Input.GetKeyDown(KeyCode.DownArrow))
             {
 
-                StartCoroutine(Atornillado());
-                isAtornillado = true;
+                transform.Rotate(0.0f, 0.0f, 45f, Space.Self);
 
             }
-
         }
+        else
+        {
+            Debug.Log("else");
+            StartCoroutine(Atornillado());
+        }
+
     }
 
 
