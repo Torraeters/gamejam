@@ -6,7 +6,17 @@ public class GameManager : MonoBehaviour
 {
     // ------------------------
     // Atributos estaticos
-    // ------------------------
+    // -----------------------
+
+    Contador contador;
+    GameObject cont;
+    Encajar encajar;
+    GameObject hole;
+
+    // tiempo que se añade cuando se encaja una pieza
+    public int tiempo = 5;
+
+    private bool esLaPrimeraVez = true;
 
     //att privado (_instancia)
     static private GameManager _instancia;
@@ -48,4 +58,21 @@ public class GameManager : MonoBehaviour
     // Constructor
     // Lo ocultamos el constructor para no poder crear nuevos objetos "sin control"
     protected GameManager() { }
+
+    void Start()
+    {
+        hole = GameObject.Find("hole");
+        encajar = hole.GetComponent<Encajar>();
+        cont = GameObject.Find("Main Camera");
+        contador = cont.GetComponent<Contador>();
+    }
+
+    void Update()
+    {
+        if (encajar.isFitIn && esLaPrimeraVez)
+        {
+            contador.anyadirTiempo(tiempo);
+            esLaPrimeraVez = false;
+        }
+    }
 }
