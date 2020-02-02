@@ -11,7 +11,7 @@ public class preload : MonoBehaviour
         if (GameManager.instance == null)
         {
             Instantiate(gameManager);
-            SceneManager.LoadScene("main");
+            SceneManager.LoadScene("menuPrincipal");
         }
     }
 }

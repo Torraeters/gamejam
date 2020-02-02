@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class botonesMenu : MonoBehaviour
 {
@@ -47,7 +49,7 @@ public class botonesMenu : MonoBehaviour
 
     public void jugar()
     {
-
+        SceneManager.LoadScene("main");
     }
 
     public void salir()
