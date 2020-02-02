@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     private bool esLaPrimeraVez = true;
     private bool youWin = false;
 
+    public Scene currentScene;
+
     // Miramos si se ha pausado el juego
     private bool isPaused = false;
 
@@ -67,11 +69,42 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
+    }
+
+    void OnSceneLoaded(Scene scene,LoadSceneMode mode)
+    {
+        currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name != "menuPrincipal" && currentScene.name != "preload")
+        {
+            this.initGame();
+        }
+
+    }
+
+    // called when the game is terminated
+    void OnDisable()
+    {
+        Debug.Log("OnDisable");
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // called first
+    void OnEnable()
+    {
+        Debug.Log("OnEnable called");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+
+    public void initGame()
+    {
         hole = GameObject.Find("engranajeConAcopleAgujero");
         encajar = hole.GetComponent<Encajar>();
         cont = GameObject.Find("Main Camera");
         contador = cont.GetComponent<Contador>();
         holesList = GameObject.FindGameObjectsWithTag("hole");
+
 
         botonMenu.onClick.AddListener(botonMenuPulsado);
         botonReplay.onClick.AddListener(botonReplayPulsado);
@@ -79,16 +112,20 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+
+        if (currentScene.name != "menuPrincipal" && currentScene.name != "preload")
         {
-            pauseGame();
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                pauseGame();
+            }
+            if (encajar.isFitIn && esLaPrimeraVez)
+            {
+                contador.anyadirTiempo(tiempo);
+                esLaPrimeraVez = false;
+            }
+            winLostGame();
         }
-        if (encajar.isFitIn && esLaPrimeraVez)
-        {
-            contador.anyadirTiempo(tiempo);
-            esLaPrimeraVez = false;
-        }
-        winLostGame();
     }
 
     private void pauseGame()
@@ -107,6 +144,7 @@ public class GameManager : MonoBehaviour
 
     private void winLostGame()
     {
+        //Debug.Log(contador.tiempoRestante);
         if (contador.tiempoRestante > 0)
         {
 
@@ -128,7 +166,7 @@ public class GameManager : MonoBehaviour
             winPanel.GetComponent<Animator>().SetBool("isOpen", true);
 
         }
-        else if (contador.tiempoRestante == 0 && youWin == false)
+        else if (contador.tiempoRestante == 0 )
         {
             // Aquí se ha de poner lo que queremos que haga cuando se haya perdido
             Debug.Log("Has perdido");
