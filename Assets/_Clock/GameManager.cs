@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
     public Button botonMenu;
     public Button botonReplay;
 
+    public Button botonMenuWin;
+    public Button botonNextLevel;
+
     void Awake()
     {
         //Check if instance already exists
@@ -72,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void OnSceneLoaded(Scene scene,LoadSceneMode mode)
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         currentScene = SceneManager.GetActiveScene();
         if (currentScene.name != "menuPrincipal" && currentScene.name != "preload")
@@ -108,6 +111,9 @@ public class GameManager : MonoBehaviour
 
         botonMenu.onClick.AddListener(botonMenuPulsado);
         botonReplay.onClick.AddListener(botonReplayPulsado);
+
+        botonMenuWin.onClick.AddListener(botonMenuWinPulsado);
+        botonNextLevel.onClick.AddListener(botonNextLevelPulsado);
     }
 
     void Update()
@@ -166,7 +172,7 @@ public class GameManager : MonoBehaviour
             winPanel.GetComponent<Animator>().SetBool("isOpen", true);
 
         }
-        else if (contador.tiempoRestante == 0 )
+        else if (contador.tiempoRestante == 0)
         {
             // Aquí se ha de poner lo que queremos que haga cuando se haya perdido
             Debug.Log("Has perdido");
@@ -176,9 +182,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Para el panel de game over
     private void botonMenuPulsado()
     {
         // Cargar la escena del menu
+        gameOverPanel.GetComponent<Animator>().SetBool("isOpen", false);
+        SceneManager.LoadScene("menuPrincipal");
     }
 
     private void botonReplayPulsado()
@@ -186,5 +195,19 @@ public class GameManager : MonoBehaviour
         gameOverPanel.GetComponent<Animator>().SetBool("isOpen", false);
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+    }
+
+    private void botonNextLevelPulsado()
+    {
+        winPanel.GetComponent<Animator>().SetBool("isOpen", false);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+
+    // Para el panel de win
+    private void botonMenuWinPulsado() {
+        // Cargar la escena del menu
+        winPanel.GetComponent<Animator>().SetBool("isOpen", false);
+        SceneManager.LoadScene("menuPrincipal");
     }
 }
