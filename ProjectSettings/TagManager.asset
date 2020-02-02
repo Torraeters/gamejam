@@ -8,6 +8,7 @@ TagManager:
   - hole
   - suelo
   - tornillo
+  - agTornillo
   layers:
   - Default
   - TransparentFX

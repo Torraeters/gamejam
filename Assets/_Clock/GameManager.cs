@@ -28,9 +28,6 @@ public class GameManager : MonoBehaviour
     // Lista de objetos de la pantalla tipo Hole
     private GameObject[] holesList;
 
-    // Lista de objetos de la pantalla tipo tornillo
-    private GameObject[] tornillos;
-
     //att publico (instancia) por el que accedemos
     public static GameManager instance = null;
 
@@ -82,8 +79,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        tornillos = GameObject.FindGameObjectsWithTag("tornillo");
-        Debug.Log(tornillos.Length);
         if (Input.GetKeyDown(KeyCode.P))
         {
             pauseGame();
@@ -120,16 +115,6 @@ public class GameManager : MonoBehaviour
                 Encajar encajar = holeElement.GetComponent<Encajar>();
                 if (!encajar.isFitIn)
                 {
-                    return;
-                }
-            }
-
-            foreach (GameObject tornilloElement in tornillos)
-            {
-                atornillar torn = tornilloElement.GetComponent<atornillar>();
-                if (!torn.atornillado)
-                {
-                    Debug.Log("no atornillado");
                     return;
                 }
             }
