@@ -7,6 +7,7 @@ TagManager:
   - piece
   - hole
   - suelo
+  - tornillo
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Particulas
+    uniqueID: 1575047055
     locked: 0
