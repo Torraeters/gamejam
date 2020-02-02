@@ -13,16 +13,22 @@ public class GameManager : MonoBehaviour
     GameObject cont;
     Encajar encajar;
     GameObject hole;
+    atornillar atornillar;
+    GameObject tornillo;
 
     // tiempo que se añade cuando se encaja una pieza
     public int tiempo = 5;
     private bool esLaPrimeraVez = true;
+    private bool youWin = false;
 
     // Miramos si se ha pausado el juego
     private bool isPaused = false;
 
     // Lista de objetos de la pantalla tipo Hole
     private GameObject[] holesList;
+
+    // Lista de objetos de la pantalla tipo tornillo
+    private GameObject[] tornillos;
 
     //att publico (instancia) por el que accedemos
     public static GameManager instance = null;
@@ -75,6 +81,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        tornillos = GameObject.FindGameObjectsWithTag("tornillo");
+        Debug.Log(tornillos.Length);
         if (Input.GetKeyDown(KeyCode.P))
         {
             pauseGame();
@@ -105,6 +113,7 @@ public class GameManager : MonoBehaviour
     {
         if (contador.tiempoRestante != 0)
         {
+
             foreach (GameObject holeElement in holesList)
             {
                 Encajar encajar = holeElement.GetComponent<Encajar>();
@@ -113,20 +122,31 @@ public class GameManager : MonoBehaviour
                     return;
                 }
             }
+
+            foreach (GameObject tornilloElement in tornillos)
+            {
+                atornillar torn = tornilloElement.GetComponent<atornillar>();
+                if (!torn.atornillado)
+                {
+                    Debug.Log("no atornillado");
+                    return;
+                }
+            }
+
             // Aquí se ha de poner lo que queremos que haga cuando se haya ganado
             Debug.Log("Has ganado");
 
+            youWin = true;
+
             // Activamos animacion ganar
             winPanel.GetComponent<Animator>().SetBool("isOpen", true);
-            //this.pauseGame();
 
         }
-        else if (contador.tiempoRestante == 0)
+        else if (contador.tiempoRestante == 0 && youWin == false)
         {
             // Aquí se ha de poner lo que queremos que haga cuando se haya perdido
             Debug.Log("Has perdido");
             gameOverPanel.GetComponent<Animator>().SetBool("isOpen", true);
-            //this.pauseGame();
 
         }
     }
