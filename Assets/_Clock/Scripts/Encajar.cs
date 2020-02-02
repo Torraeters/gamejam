@@ -7,6 +7,7 @@ public class Encajar : MonoBehaviour
     public string targetPieceType;
     public GameObject targetPiece;
     public bool isFitIn = false;
+    public bool atornillado;
     private float targetPieceRotation;
     GameObject caidaObjetos;
     CaidaObjetosScript caidaObjetosScript;
@@ -53,6 +54,7 @@ public class Encajar : MonoBehaviour
                     }
                     this.targetPiece.tag = "Untagged";
                     isFitIn = true;
+                    atornillado = true;
                     this.enabled = false;
                     targetPiece.GetComponent<Collider2D>().enabled = false;
 
