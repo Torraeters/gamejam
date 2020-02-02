@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -111,7 +112,7 @@ public class GameManager : MonoBehaviour
 
     private void winLostGame()
     {
-        if (contador.tiempoRestante != 0)
+        if (contador.tiempoRestante > 0)
         {
 
             foreach (GameObject holeElement in holesList)
@@ -146,6 +147,7 @@ public class GameManager : MonoBehaviour
         {
             // Aquí se ha de poner lo que queremos que haga cuando se haya perdido
             Debug.Log("Has perdido");
+            contador.tiempoRestante = -1;
             gameOverPanel.GetComponent<Animator>().SetBool("isOpen", true);
 
         }
@@ -158,6 +160,8 @@ public class GameManager : MonoBehaviour
 
     private void botonReplayPulsado()
     {
-
+        gameOverPanel.GetComponent<Animator>().SetBool("isOpen", false);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }
