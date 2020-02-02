@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,6 +34,9 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject winPanel;
 
+    public Button botonMenu;
+    public Button botonReplay;
+
     void Awake()
     {
         //Check if instance already exists
@@ -57,7 +62,7 @@ public class GameManager : MonoBehaviour
 
 
     // Constructor
-    // Lo ocultamos el constructor para no poder crear nuevos objetos "sin control"
+    // Lo ocultamos para no poder crear nuevos objetos "sin control"
     protected GameManager() { }
 
     void Start()
@@ -68,6 +73,8 @@ public class GameManager : MonoBehaviour
         contador = cont.GetComponent<Contador>();
         holesList = GameObject.FindGameObjectsWithTag("hole");
 
+        botonMenu.onClick.AddListener(botonMenuPulsado);
+        botonReplay.onClick.AddListener(botonReplayPulsado);
     }
 
     void Update()
@@ -100,7 +107,7 @@ public class GameManager : MonoBehaviour
 
     private void winLostGame()
     {
-        if (contador.tiempoRestante != 0)
+        if (contador.tiempoRestante > 0)
         {
 
             foreach (GameObject holeElement in holesList)
@@ -125,8 +132,21 @@ public class GameManager : MonoBehaviour
         {
             // Aquí se ha de poner lo que queremos que haga cuando se haya perdido
             Debug.Log("Has perdido");
+            contador.tiempoRestante = -1;
             gameOverPanel.GetComponent<Animator>().SetBool("isOpen", true);
 
         }
+    }
+
+    private void botonMenuPulsado()
+    {
+        // Cargar la escena del menu
+    }
+
+    private void botonReplayPulsado()
+    {
+        gameOverPanel.GetComponent<Animator>().SetBool("isOpen", false);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }
