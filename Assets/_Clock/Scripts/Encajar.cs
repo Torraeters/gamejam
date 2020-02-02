@@ -10,7 +10,6 @@ public class Encajar : MonoBehaviour
     private float targetPieceRotation;
     GameObject caidaObjetos;
     CaidaObjetosScript caidaObjetosScript;
-
     public GameObject particulas;
 
     // Start is called before the first frame update
@@ -56,10 +55,7 @@ public class Encajar : MonoBehaviour
                     this.enabled = false;
                     targetPiece.GetComponent<Collider2D>().enabled = false;
 
-
-
                     gameObject.SetActive(false);
-
                 }
             }
         }

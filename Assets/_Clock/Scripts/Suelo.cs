@@ -38,7 +38,7 @@ public class Suelo : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        Destroy(piezaActual);
+        Destroy(piezaActual.transform.parent.gameObject);
         caidaObjetosScript.dejarCaerSiguiente();
     }
 }
