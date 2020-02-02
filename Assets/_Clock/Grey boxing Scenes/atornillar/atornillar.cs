@@ -10,7 +10,7 @@ public class atornillar : MonoBehaviour
     public Color rojo = Color.red;
     public Color green = Color.green;
     bool rutinaEmpezada;
-    bool atornillado;
+    public bool atornillado;
     int nivelAtornillado;
     GameObject caidaObjetos;
     CaidaObjetosScript caidaObjetosScript;
