@@ -38,7 +38,6 @@ public class Contador : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(startTime);
         if (currentScene.name != "menuPrincipal" && currentScene.name != "preload" && aguja !=null)
         {
             // Calculamos el ángulo en grados para el giro
@@ -70,7 +69,7 @@ public class Contador : MonoBehaviour
     // Función que añade tiempo al contador para cuando el jugador acierta, y rota la aguja
     // conforme al tiempo que se haya añadido
     public void anyadirTiempo(int tiempo)
-    {/*
+    {
         tiempoRestante += tiempo;
         if (tiempoRestante > 60)
         {
@@ -80,7 +79,7 @@ public class Contador : MonoBehaviour
         else
         {
             aguja.transform.Rotate(0.0f, 0.0f, anguloEnSegundos * tiempo, Space.Self);
-        }*/
+        }
     }
 
     public void stopMovimientoAguja()

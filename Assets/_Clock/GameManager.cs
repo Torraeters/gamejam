@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
     public Button botonMenuWin;
     public Button botonNextLevel;
 
+    public int contadorNiveles = 0;
+    public bool nivelCargado;
+
     void Awake()
     {
         //Check if instance already exists
@@ -80,11 +83,15 @@ public class GameManager : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
         if (currentScene.name != "menuPrincipal" && currentScene.name != "preload")
         {
+            nivelCargado = false;
             this.initGame();
             contador.currentScene = currentScene;
-            contador.startTime = 0f;
-            contador.stop = false;
-            contador.tiempoRestante = 60f;
+            if (!youWin)
+            {
+                contador.startTime = 0f;
+                contador.stop = false;
+                contador.tiempoRestante = 60f;
+            }
         }
 
     }
@@ -129,7 +136,7 @@ public class GameManager : MonoBehaviour
             }
             if (encajar.isFitIn && esLaPrimeraVez)
             {
-                contador.anyadirTiempo(tiempo);
+                //contador.anyadirTiempo(tiempo);
                 esLaPrimeraVez = false;
             }
             winLostGame();
@@ -153,7 +160,7 @@ public class GameManager : MonoBehaviour
     private void winLostGame()
     {
         //Debug.Log(contador.tiempoRestante);
-        if (contador.tiempoRestante > 0)
+        if (contador.tiempoRestante > 0 && nivelCargado == false)
         {
 
             foreach (GameObject holeElement in holesList)
@@ -171,7 +178,9 @@ public class GameManager : MonoBehaviour
             youWin = true;
 
             // Activamos animacion ganar
-            winPanel.GetComponent<Animator>().SetBool("isOpen", true);
+            // winPanel.GetComponent<Animator>().SetBool("isOpen", true);
+            contadorNiveles++;
+            cargarSiguienteNivel();
 
         }
         else if (contador.tiempoRestante == 0)
@@ -194,6 +203,7 @@ public class GameManager : MonoBehaviour
 
     private void botonReplayPulsado()
     {
+        youWin = false;
         gameOverPanel.GetComponent<Animator>().SetBool("isOpen", false);
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
@@ -207,9 +217,16 @@ public class GameManager : MonoBehaviour
     }
 
     // Para el panel de win
-    private void botonMenuWinPulsado() {
+    private void botonMenuWinPulsado()
+    {
         // Cargar la escena del menu
         winPanel.GetComponent<Animator>().SetBool("isOpen", false);
         SceneManager.LoadScene("menuPrincipal");
+    }
+
+    private void cargarSiguienteNivel()
+    {
+        nivelCargado = true;
+        SceneManager.LoadScene("Nivel " + contadorNiveles);
     }
 }

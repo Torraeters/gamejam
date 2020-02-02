@@ -50,6 +50,7 @@ public class Encajar : MonoBehaviour
                     if (this.targetPiece.tag == "piece")
                     {
                         caidaObjetosScript.dejarCaerSiguiente();
+                        GameObject.Find("GameManager(Clone)").GetComponent<Contador>().anyadirTiempo(5);
                     }
                     this.targetPiece.tag = "Untagged";
                     isFitIn = true;
