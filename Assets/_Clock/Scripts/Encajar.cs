@@ -7,9 +7,11 @@ public class Encajar : MonoBehaviour
     public string targetPieceType;
     public GameObject targetPiece;
     public bool isFitIn = false;
+    public bool atornillado;
     private float targetPieceRotation;
     GameObject caidaObjetos;
     CaidaObjetosScript caidaObjetosScript;
+    public GameObject particulas;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,8 @@ public class Encajar : MonoBehaviour
                 if (xDistance < minDistance && yDistance < minDistance && angleDiff < 0.2)
                 {
                     this.targetPiece.transform.parent.gameObject.transform.position = transform.position;
+                    particulas.GetComponent<ParticleSystem>().GetComponent<Renderer>().sortingLayerName = "Particulas";
+                    particulas.GetComponent<ParticleSystem>().Play();
                     this.targetPiece.transform.parent.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
                     this.targetPiece.GetComponent<Animator>().SetBool("isWorking", true);
                     if (this.targetPiece.tag == "piece")
@@ -49,13 +53,11 @@ public class Encajar : MonoBehaviour
                     }
                     this.targetPiece.tag = "Untagged";
                     isFitIn = true;
+                    atornillado = true;
                     this.enabled = false;
                     targetPiece.GetComponent<Collider2D>().enabled = false;
 
-
-
                     gameObject.SetActive(false);
-
                 }
             }
         }

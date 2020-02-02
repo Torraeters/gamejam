@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,10 +14,15 @@ public class GameManager : MonoBehaviour
     GameObject cont;
     Encajar encajar;
     GameObject hole;
+    atornillar atornillar;
+    GameObject tornillo;
 
     // tiempo que se añade cuando se encaja una pieza
     public int tiempo = 5;
     private bool esLaPrimeraVez = true;
+    private bool youWin = false;
+
+    public Scene currentScene;
 
     // Miramos si se ha pausado el juego
     private bool isPaused = false;
@@ -28,6 +35,12 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverPanel;
     public GameObject winPanel;
+
+    public Button botonMenu;
+    public Button botonReplay;
+
+    public Button botonMenuWin;
+    public Button botonNextLevel;
 
     void Awake()
     {
@@ -54,30 +67,71 @@ public class GameManager : MonoBehaviour
 
 
     // Constructor
-    // Lo ocultamos el constructor para no poder crear nuevos objetos "sin control"
+    // Lo ocultamos para no poder crear nuevos objetos "sin control"
     protected GameManager() { }
 
     void Start()
+    {
+
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name != "menuPrincipal" && currentScene.name != "preload")
+        {
+            this.initGame();
+        }
+
+    }
+
+    // called when the game is terminated
+    void OnDisable()
+    {
+        Debug.Log("OnDisable");
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // called first
+    void OnEnable()
+    {
+        Debug.Log("OnEnable called");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+
+    public void initGame()
     {
         hole = GameObject.Find("engranajeConAcopleAgujero");
         encajar = hole.GetComponent<Encajar>();
         cont = GameObject.Find("Main Camera");
         contador = cont.GetComponent<Contador>();
         holesList = GameObject.FindGameObjectsWithTag("hole");
+
+
+        botonMenu.onClick.AddListener(botonMenuPulsado);
+        botonReplay.onClick.AddListener(botonReplayPulsado);
+
+        botonMenuWin.onClick.AddListener(botonMenuWinPulsado);
+        botonNextLevel.onClick.AddListener(botonNextLevelPulsado);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+
+        if (currentScene.name != "menuPrincipal" && currentScene.name != "preload")
         {
-            pauseGame();
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                pauseGame();
+            }
+            if (encajar.isFitIn && esLaPrimeraVez)
+            {
+                contador.anyadirTiempo(tiempo);
+                esLaPrimeraVez = false;
+            }
+            winLostGame();
         }
-        if (encajar.isFitIn && esLaPrimeraVez)
-        {
-            contador.anyadirTiempo(tiempo);
-            esLaPrimeraVez = false;
-        }
-        winLostGame();
     }
 
     private void pauseGame()
@@ -96,8 +150,10 @@ public class GameManager : MonoBehaviour
 
     private void winLostGame()
     {
-        if (contador.tiempoRestante != 0)
+        //Debug.Log(contador.tiempoRestante);
+        if (contador.tiempoRestante > 0)
         {
+
             foreach (GameObject holeElement in holesList)
             {
                 Encajar encajar = holeElement.GetComponent<Encajar>();
@@ -106,21 +162,52 @@ public class GameManager : MonoBehaviour
                     return;
                 }
             }
+
             // Aquí se ha de poner lo que queremos que haga cuando se haya ganado
             Debug.Log("Has ganado");
 
+            youWin = true;
+
             // Activamos animacion ganar
             winPanel.GetComponent<Animator>().SetBool("isOpen", true);
-            //this.pauseGame();
 
         }
         else if (contador.tiempoRestante == 0)
         {
             // Aquí se ha de poner lo que queremos que haga cuando se haya perdido
             Debug.Log("Has perdido");
+            contador.tiempoRestante = -1;
             gameOverPanel.GetComponent<Animator>().SetBool("isOpen", true);
-            //this.pauseGame();
 
         }
+    }
+
+    // Para el panel de game over
+    private void botonMenuPulsado()
+    {
+        // Cargar la escena del menu
+        gameOverPanel.GetComponent<Animator>().SetBool("isOpen", false);
+        SceneManager.LoadScene("menuPrincipal");
+    }
+
+    private void botonReplayPulsado()
+    {
+        gameOverPanel.GetComponent<Animator>().SetBool("isOpen", false);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+
+    private void botonNextLevelPulsado()
+    {
+        winPanel.GetComponent<Animator>().SetBool("isOpen", false);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+
+    // Para el panel de win
+    private void botonMenuWinPulsado() {
+        // Cargar la escena del menu
+        winPanel.GetComponent<Animator>().SetBool("isOpen", false);
+        SceneManager.LoadScene("menuPrincipal");
     }
 }

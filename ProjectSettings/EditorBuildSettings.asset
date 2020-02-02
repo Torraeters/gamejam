@@ -11,7 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Clock/preload.unity
     guid: 2487efc8078024f809254509b94265c7
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/_Clock/main.unity
-    guid: 5615bd8dcc0452d36a1ed4c3bc4351d1
+    guid: 55931116f1332919e9159b07c2714b59
+  - enabled: 1
+    path: Assets/_Clock/Grey boxing Scenes/menuPrincipal/menuPrincipal.unity
+    guid: 6da1cb85a4227234882d0b8ea28f7186
   m_configObjects: {}
