@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverPanel;
     public GameObject winPanel;
+    public GameObject pauseGamePanel;
+
 
     public Button botonMenu;
     public Button botonReplay;
@@ -147,11 +149,13 @@ public class GameManager : MonoBehaviour
     {
         if (isPaused)
         {
+            pauseGamePanel.GetComponent<Animator>().SetBool("isOpen", true);
             isPaused = false;
             Time.timeScale = 0;
         }
         else
         {
+            pauseGamePanel.GetComponent<Animator>().SetBool("isOpen", false);
             isPaused = true;
             Time.timeScale = 1;
         }
