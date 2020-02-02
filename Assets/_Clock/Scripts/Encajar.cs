@@ -58,10 +58,12 @@ public class Encajar : MonoBehaviour
                     this.enabled = false;
                     targetPiece.GetComponent<Collider2D>().enabled = false;
 
-                    if (gameObject.GetComponentInChildren<Animator>() !=null){
+                    if (gameObject.GetComponentInChildren<Animator>() != null)
+                    {
                         gameObject.GetComponentInChildren<Animator>().SetBool("points", true);
-                        gameObject.GetComponent<SpriteRenderer>().enabled = false;
                     }
+                    gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
                     //gameObject.SetActive(false);
                 }
             }
