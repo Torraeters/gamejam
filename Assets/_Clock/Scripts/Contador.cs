@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Contador : MonoBehaviour
 {
@@ -9,7 +10,10 @@ public class Contador : MonoBehaviour
     public float tiempoRestante;
 
     // Aguja del reloj
-    public GameObject aguja;
+    public GameObject aguja = null;
+
+    public Scene currentScene;
+
 
     public Text text;
 
@@ -20,42 +24,53 @@ public class Contador : MonoBehaviour
     // la aguja cada segundo. Cada 60 segundos debería rotar 360º.
     float anguloEnSegundos = 6;
 
-    float startTime;
+    public float startTime;
 
-    bool stop = false;
+    public bool stop = false;
 
-    void Start() {
+    void Start()
+    {
         // Cogemos el tiempo inicial
-        startTime = Time.time;
+        startTime = Time.timeSinceLevelLoad;
+        currentScene.name = "preload";
+        //Debug.Log("start");
     }
 
-    void Update() {
-        // Calculamos el ángulo en grados para el giro
-        float angulo = anguloEnSegundos*tiempoRestante;
-        
-        // Mostramos el tiempo
-        text.text = Mathf.Round(tiempoRestante) + "s";
+    void Update()
+    {
+        Debug.Log(startTime);
+        if (currentScene.name != "menuPrincipal" && currentScene.name != "preload" && aguja !=null)
+        {
+            // Calculamos el ángulo en grados para el giro
+            float angulo = anguloEnSegundos * tiempoRestante;
 
-        // Cada 'segundo' moverá la aguja un segundo de reloj
-        if (Time.time - startTime >= tiempoMovimientoAguja && stop == false) {
-            // Restamos el tiempo conforme avanza
-            tiempoRestante -= 1;
+            // Mostramos el tiempo
+            //text.text = Mathf.Round(tiempoRestante) + "s";
 
-            // Rotamos la aguja 
-            aguja.transform.Rotate(0.0f, 0.0f, -anguloEnSegundos, Space.Self);
+            // Cada 'segundo' moverá la aguja un segundo de reloj
+            if (Time.timeSinceLevelLoad - startTime >= tiempoMovimientoAguja && stop == false)
+            {
+                // Restamos el tiempo conforme avanza
+                tiempoRestante -= 1;
 
-            // Actualizamos el valor de starttime
-            startTime = Time.time;
-        }
+                // Rotamos la aguja 
+                aguja.transform.Rotate(0.0f, 0.0f, -anguloEnSegundos, Space.Self);
 
-        if (tiempoRestante <= 0) {
-            stopMovimientoAguja();
+                // Actualizamos el valor de starttime
+                startTime = Time.timeSinceLevelLoad;
+            }
+
+            if (tiempoRestante <= 0)
+            {
+                stopMovimientoAguja();
+            }
         }
     }
 
     // Función que añade tiempo al contador para cuando el jugador acierta, y rota la aguja
     // conforme al tiempo que se haya añadido
-    public void anyadirTiempo(int tiempo) {
+    public void anyadirTiempo(int tiempo)
+    {/*
         tiempoRestante += tiempo;
         if (tiempoRestante > 60)
         {
@@ -65,16 +80,24 @@ public class Contador : MonoBehaviour
         else
         {
             aguja.transform.Rotate(0.0f, 0.0f, anguloEnSegundos * tiempo, Space.Self);
-        }
+        }*/
     }
 
-    public void stopMovimientoAguja() {
+    public void stopMovimientoAguja()
+    {
         stop = true;
+        startTime = 0f;
     }
 
     // Función para cambiar la velocidad de la aguja
-    public void cambiarTiempoMovimientoAguja(float nuevoTiempoMovimientoAguja) {
+    public void cambiarTiempoMovimientoAguja(float nuevoTiempoMovimientoAguja)
+    {
         tiempoMovimientoAguja = nuevoTiempoMovimientoAguja;
     }
-   
+    
+    public void initContador() {
+        startTime = 0f;
+        tiempoRestante = 60f;
+    }
+
 }

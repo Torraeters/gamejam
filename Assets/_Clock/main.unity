@@ -1535,12 +1535,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3230642501156884746}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &983374730 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6670573220989235749, guid: a9e136a8caa3f454d8b9ab674caf423d,
-    type: 3}
-  m_PrefabInstance: {fileID: 899047511}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1224297646 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: 44dd4fdbb6f10429a844c51183a4c84e,
@@ -1880,7 +1874,6 @@ GameObject:
   - component: {fileID: 1931443161}
   - component: {fileID: 1931443160}
   - component: {fileID: 1931443159}
-  - component: {fileID: 1931443162}
   - component: {fileID: 1931443165}
   - component: {fileID: 1931443164}
   - component: {fileID: 1931443163}
@@ -1956,22 +1949,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1931443162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931443158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 046e5185defd244529d68f60c4ebb1f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tiempoRestante: 60
-  aguja: {fileID: 983374730}
-  text: {fileID: 760410750}
-  tiempoMovimientoAguja: 0.1
 --- !u!61 &1931443163
 BoxCollider2D:
   m_ObjectHideFlags: 0

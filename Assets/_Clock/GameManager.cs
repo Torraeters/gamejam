@@ -72,7 +72,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -81,6 +80,10 @@ public class GameManager : MonoBehaviour
         if (currentScene.name != "menuPrincipal" && currentScene.name != "preload")
         {
             this.initGame();
+            contador.currentScene = currentScene;
+            contador.startTime = 0f;
+            contador.stop = false;
+            contador.tiempoRestante = 60f;
         }
 
     }
@@ -104,8 +107,9 @@ public class GameManager : MonoBehaviour
     {
         hole = GameObject.Find("engranajeConAcopleAgujero");
         encajar = hole.GetComponent<Encajar>();
-        cont = GameObject.Find("Main Camera");
-        contador = cont.GetComponent<Contador>();
+        //cont = GameObject.Find("Main Camera");
+        contador = GetComponent<Contador>();
+        contador.aguja = GameObject.Find("Aguja_larga");
         holesList = GameObject.FindGameObjectsWithTag("hole");
 
 
@@ -194,6 +198,7 @@ public class GameManager : MonoBehaviour
     {
         gameOverPanel.GetComponent<Animator>().SetBool("isOpen", false);
         Scene scene = SceneManager.GetActiveScene();
+        //initGame();
         SceneManager.LoadScene(scene.name);
     }
 
