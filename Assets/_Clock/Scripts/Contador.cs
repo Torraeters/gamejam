@@ -25,6 +25,7 @@ public class Contador : MonoBehaviour
     float anguloEnSegundos = 6;
 
     public float startTime;
+    public float elapsedTime;
 
     public bool stop = false;
 
@@ -38,16 +39,16 @@ public class Contador : MonoBehaviour
 
     void Update()
     {
+        if(GetComponent<GameManager>().youWin) elapsedTime = Time.time;
+        else elapsedTime = Time.timeSinceLevelLoad;
+        //Debug.Log(Time.timeSinceLevelLoad - startTime);
         if (currentScene.name != "menuPrincipal" && currentScene.name != "preload" && aguja !=null)
         {
-            // Calculamos el ángulo en grados para el giro
-            float angulo = anguloEnSegundos * tiempoRestante;
-
             // Mostramos el tiempo
             //text.text = Mathf.Round(tiempoRestante) + "s";
 
             // Cada 'segundo' moverá la aguja un segundo de reloj
-            if (Time.timeSinceLevelLoad - startTime >= tiempoMovimientoAguja && stop == false)
+            if (elapsedTime - startTime >= tiempoMovimientoAguja && stop == false)
             {
                 // Restamos el tiempo conforme avanza
                 tiempoRestante -= 1;
@@ -56,7 +57,7 @@ public class Contador : MonoBehaviour
                 aguja.transform.Rotate(0.0f, 0.0f, -anguloEnSegundos, Space.Self);
 
                 // Actualizamos el valor de starttime
-                startTime = Time.timeSinceLevelLoad;
+                startTime = elapsedTime;
             }
 
             if (tiempoRestante <= 0)
