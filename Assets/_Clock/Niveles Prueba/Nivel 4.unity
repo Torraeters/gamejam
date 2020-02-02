@@ -207,7 +207,6 @@ GameObject:
   - component: {fileID: 208218100}
   - component: {fileID: 208218099}
   - component: {fileID: 208218098}
-  - component: {fileID: 208218097}
   - component: {fileID: 208218096}
   - component: {fileID: 208218095}
   - component: {fileID: 208218094}
@@ -279,26 +278,6 @@ Skybox:
   m_GameObject: {fileID: 208218093}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 0}
---- !u!114 &208218097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208218093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 046e5185defd244529d68f60c4ebb1f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tiempoRestante: 60
-  aguja: {fileID: 0}
-  currentScene:
-    m_Handle: 0
-  text: {fileID: 1492818519}
-  tiempoMovimientoAguja: 1
-  startTime: 0
-  stop: 0
 --- !u!81 &208218098
 AudioListener:
   m_ObjectHideFlags: 0
@@ -684,19 +663,19 @@ PrefabInstance:
         type: 3}
       propertyPath: piezas.Array.data[1]
       value: 
-      objectReference: {fileID: 5840086564250383751, guid: c60ba963b8e4943b6a88013ec2b6e3c1,
+      objectReference: {fileID: 776145114846207061, guid: c60ba963b8e4943b6a88013ec2b6e3c1,
         type: 3}
     - target: {fileID: 4511234504936074414, guid: 73777c7aef1f9ab42990f2dc26228a9f,
         type: 3}
       propertyPath: piezas.Array.data[2]
       value: 
-      objectReference: {fileID: 2213703957451148413, guid: e611891489fe64892a459e2d7e0675d8,
+      objectReference: {fileID: 5192854965907750031, guid: e611891489fe64892a459e2d7e0675d8,
         type: 3}
     - target: {fileID: 4511234504936074414, guid: 73777c7aef1f9ab42990f2dc26228a9f,
         type: 3}
       propertyPath: piezas.Array.data[0]
       value: 
-      objectReference: {fileID: 2213703957451148413, guid: 2f65bc6e3ff1b58f9a30facbce028ebb,
+      objectReference: {fileID: 631136011648534791, guid: 2f65bc6e3ff1b58f9a30facbce028ebb,
         type: 3}
     - target: {fileID: 4511234504936074415, guid: 73777c7aef1f9ab42990f2dc26228a9f,
         type: 3}
@@ -1528,12 +1507,12 @@ PrefabInstance:
     - target: {fileID: 5895936264793442869, guid: ceca7d18eaf439329ba70df719105073,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.10000001
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5895936264793442869, guid: ceca7d18eaf439329ba70df719105073,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.10000001
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ceca7d18eaf439329ba70df719105073, type: 3}
