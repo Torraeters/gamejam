@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     // tiempo que se añade cuando se encaja una pieza
     public int tiempo = 5;
     private bool esLaPrimeraVez = true;
-    private bool youWin = false;
+    public bool youWin = false;
 
     public Scene currentScene;
 
@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject winPanel;
     public GameObject pauseGamePanel;
-
 
     public Button botonMenu;
     public Button botonReplay;
@@ -88,11 +87,15 @@ public class GameManager : MonoBehaviour
             nivelCargado = false;
             this.initGame();
             contador.currentScene = currentScene;
+            Debug.Log(youWin);
+            Debug.Log("starttime" + contador.startTime);
+            Debug.Log("tiempoRestante" + contador.tiempoRestante);
             if (!youWin)
             {
                 contador.startTime = 0f;
                 contador.stop = false;
                 contador.tiempoRestante = 60f;
+                contador.aguja.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             }
         }
 
