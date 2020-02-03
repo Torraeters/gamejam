@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     public int contadorNiveles = 0;
     public bool nivelCargado;
+    Musica musica;
 
     void Awake()
     {
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         currentScene = SceneManager.GetActiveScene();
+        musica = GameObject.Find("Musica").GetComponent<Musica>();
         if (currentScene.name != "menuPrincipal" && currentScene.name != "preload")
         {
             nivelCargado = false;
@@ -97,7 +99,9 @@ public class GameManager : MonoBehaviour
                 contador.tiempoRestante = 60f;
                 contador.aguja.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             }
+            if (!musica.isPlaying) musica.play();
         }
+        if (currentScene.name == "menuPrincipal") musica.stop();
 
     }
 
