@@ -22,14 +22,26 @@ EditorBuildSettings:
     guid: 6da1cb85a4227234882d0b8ea28f7186
   - enabled: 1
     path: Assets/_Clock/Niveles Prueba/Nivel 1.unity
-    guid: af0b20b42fc23d34ea5bc10c68d1bb15
+    guid: 0f3824b56adba4dc497def81ed5a11e5
   - enabled: 1
     path: Assets/_Clock/Niveles Prueba/Nivel 2.unity
-    guid: 7188e190404118e4691b91d5bf684a99
+    guid: 30b38670ab54f458585ee893b6311988
   - enabled: 1
     path: Assets/_Clock/Niveles Prueba/Nivel 3.unity
-    guid: e1428067cafc71c46b97b938668b7d73
+    guid: 4bfcc7099470549069be6f2f6008944d
   - enabled: 1
     path: Assets/_Clock/Niveles Prueba/Nivel 4.unity
-    guid: ae1fedfb22ba1f44aad638d8d713954f
+    guid: a6fe8574595294ac88352a01a3fa6c75
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
