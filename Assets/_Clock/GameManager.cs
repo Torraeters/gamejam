@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     GameObject[] piezas;
     GameObject[] sfx;
 
+    GameObject[] holes;
     void Awake()
     {
         //Check if instance already exists
@@ -129,6 +130,7 @@ public class GameManager : MonoBehaviour
         contador = GetComponent<Contador>();
         contador.aguja = GameObject.Find("Aguja_larga");
         holesList = GameObject.FindGameObjectsWithTag("hole");
+        StartCoroutine(mostrarAgujeros());
         botonMenu.onClick.AddListener(botonMenuPulsado);
         botonReplay.onClick.AddListener(botonReplayPulsado);
 
@@ -236,8 +238,7 @@ public class GameManager : MonoBehaviour
     {
         youWin = false;
         gameOverPanel.GetComponent<Animator>().SetBool("isOpen", false);
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+        SceneManager.LoadScene("Nivel 1");
     }
 
     private void botonNextLevelPulsado()
@@ -263,8 +264,21 @@ public class GameManager : MonoBehaviour
     IEnumerator caenEngranajes()
     {
         nivelCargado = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         dejarCaer = false;
         cargarSiguienteNivel();
+    }
+
+    IEnumerator mostrarAgujeros()
+    {
+        foreach (GameObject hole in holesList)
+        {
+            if (hole.GetComponent<Animator>() != null)
+            {
+                hole.GetComponent<Animator>().SetBool("grow", true);
+                yield return new WaitForSeconds(0.7f);
+                Debug.Log("now");
+            }
+        }
     }
 }
