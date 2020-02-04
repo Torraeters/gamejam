@@ -9,6 +9,8 @@ TagManager:
   - suelo
   - tornillo
   - agTornillo
+  - piezaDone
+  - sfxpieza
   layers:
   - Default
   - TransparentFX

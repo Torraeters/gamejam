@@ -47,6 +47,11 @@ public class GameManager : MonoBehaviour
     public bool nivelCargado;
     Musica musica;
 
+    bool dejarCaer;
+
+    GameObject[] piezas;
+    GameObject[] sfx;
+
     void Awake()
     {
         //Check if instance already exists
@@ -89,9 +94,6 @@ public class GameManager : MonoBehaviour
             nivelCargado = false;
             this.initGame();
             contador.currentScene = currentScene;
-            Debug.Log(youWin);
-            Debug.Log("starttime" + contador.startTime);
-            Debug.Log("tiempoRestante" + contador.tiempoRestante);
             if (!youWin)
             {
                 contador.startTime = 0f;
@@ -150,6 +152,16 @@ public class GameManager : MonoBehaviour
             }
             winLostGame();
         }
+
+        if (dejarCaer)
+        {
+            int moveSpeed = 7;
+            sfx[0].transform.Translate(0, -Time.deltaTime * moveSpeed, 0, Space.World);
+            for (int i = 0; i < piezas.Length; i++)
+            {
+                piezas[i].transform.parent.transform.Translate(0, -Time.deltaTime * moveSpeed, 0, Space.World);
+            }
+        }
     }
 
     private void pauseGame()
@@ -187,12 +199,20 @@ public class GameManager : MonoBehaviour
             Debug.Log("Has ganado");
 
             youWin = true;
+            piezas = GameObject.FindGameObjectsWithTag("piezaDone");
+            sfx = GameObject.FindGameObjectsWithTag("sfxpieza");
+
+            for (int i = 0; i < piezas.Length; i++)
+            {
+                dejarCaer = true;
+                Debug.Log(piezas[i].transform.parent.name);
+                piezas[i].transform.parent.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                piezas[i].transform.parent.transform.GetComponent<RotacionObjeto>().enabled = false;
+            }
 
             // Activamos animacion ganar
-            // winPanel.GetComponent<Animator>().SetBool("isOpen", true);
             contadorNiveles++;
-            cargarSiguienteNivel();
-
+            StartCoroutine(caenEngranajes());
         }
         else if (contador.tiempoRestante == 0)
         {
@@ -237,7 +257,14 @@ public class GameManager : MonoBehaviour
 
     private void cargarSiguienteNivel()
     {
-        nivelCargado = true;
         SceneManager.LoadScene("Nivel " + contadorNiveles);
+    }
+
+    IEnumerator caenEngranajes()
+    {
+        nivelCargado = true;
+        yield return new WaitForSeconds(1.5f);
+        dejarCaer = false;
+        cargarSiguienteNivel();
     }
 }

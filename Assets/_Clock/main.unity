@@ -293,6 +293,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 44dd4fdbb6f10429a844c51183a4c84e, type: 3}
+      propertyPath: m_TagString
+      value: sfxpieza
+      objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: 44dd4fdbb6f10429a844c51183a4c84e, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -541,6 +545,10 @@ PrefabInstance:
     - target: {fileID: 100006, guid: 44dd4fdbb6f10429a844c51183a4c84e, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 44dd4fdbb6f10429a844c51183a4c84e, type: 3}
+      propertyPath: m_TagString
+      value: sfxpieza
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: 44dd4fdbb6f10429a844c51183a4c84e, type: 3}
       propertyPath: m_IsActive
